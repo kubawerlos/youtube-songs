@@ -2,6 +2,8 @@
 
 An action that will make it easier to generate and update YouTube song lists based on a simple configuration file.
 
+You can see how this action is used [here](https://github.com/orgs/youtube-songs/repositories).
+
 ### Usage
 Create a file `.github/youtube-songs.yaml` in your repository with the songs defined, as in the example below.
 ```yaml
