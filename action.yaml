@@ -1,0 +1,11 @@
+name: YouTube songs
+description: An action that will make it easier to generate and update YouTube song lists based on a simple configuration file.
+
+author: Kuba Werłos <werlos@gmail.com>
+
+branding:
+    color: green
+    icon: music
+runs:
+    using: docker
+    image: Dockerfile
