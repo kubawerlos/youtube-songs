@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "362ec5ab6e21fdeb0e77154e4a32ec6a",
+    "content-hash": "491ed158f31f24ab771fa58f4cabdcbf",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -80,16 +80,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.330.0",
+            "version": "v0.332.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "3216fd1b6ba33c5f6658c3581e9723ff21d9acb7"
+                "reference": "027cc7fe60877c2b6ba0f380d419acf65a3755d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/3216fd1b6ba33c5f6658c3581e9723ff21d9acb7",
-                "reference": "3216fd1b6ba33c5f6658c3581e9723ff21d9acb7"
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/027cc7fe60877c2b6ba0f380d419acf65a3755d2",
+                "reference": "027cc7fe60877c2b6ba0f380d419acf65a3755d2"
             },
             "require": {
                 "php": "^7.4||^8.0"
@@ -711,21 +711,21 @@
         },
         {
             "name": "kubawerlos/php-cs-fixer-config",
-            "version": "v3.20.0",
+            "version": "v3.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kubawerlos/php-cs-fixer-config.git",
-                "reference": "f595593999101a2109f3e405c387d6990aa2b2a4"
+                "reference": "9d70f7f192710b40e3440f7cd9c625d34d9a40d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-config/zipball/f595593999101a2109f3e405c387d6990aa2b2a4",
-                "reference": "f595593999101a2109f3e405c387d6990aa2b2a4"
+                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-config/zipball/9d70f7f192710b40e3440f7cd9c625d34d9a40d7",
+                "reference": "9d70f7f192710b40e3440f7cd9c625d34d9a40d7"
             },
             "require": {
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.18",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.19",
                 "php": "^7.4 || ^8.0",
-                "php-cs-fixer/shim": "^3.42"
+                "php-cs-fixer/shim": "^3.47"
             },
             "type": "library",
             "autoload": {
@@ -740,21 +740,21 @@
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
-            "version": "v3.18.0",
+            "version": "v3.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers.git",
-                "reference": "e03b07a58e08133c92c9e7a5ccc69e1457f8c98d"
+                "reference": "425ea445cc3e24dc68d6e4625721374c94ee83e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/e03b07a58e08133c92c9e7a5ccc69e1457f8c98d",
-                "reference": "e03b07a58e08133c92c9e7a5ccc69e1457f8c98d"
+                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/425ea445cc3e24dc68d6e4625721374c94ee83e5",
+                "reference": "425ea445cc3e24dc68d6e4625721374c94ee83e5"
             },
             "require": {
                 "ext-filter": "*",
                 "ext-tokenizer": "*",
-                "friendsofphp/php-cs-fixer": "^3.22",
+                "friendsofphp/php-cs-fixer": "^3.47",
                 "php": "^7.4 || ^8.0"
             },
             "type": "library",
@@ -933,16 +933,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.46.0",
+            "version": "v3.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "e9fc76796f284c050615937b9bd2df7688452c33"
+                "reference": "f8ad2d239be6717dbee796aaa205476a2010bdc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/e9fc76796f284c050615937b9bd2df7688452c33",
-                "reference": "e9fc76796f284c050615937b9bd2df7688452c33"
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f8ad2d239be6717dbee796aaa205476a2010bdc9",
+                "reference": "f8ad2d239be6717dbee796aaa205476a2010bdc9"
             },
             "require": {
                 "ext-json": "*",
@@ -996,16 +996,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.54",
+            "version": "1.10.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3e25f279dada0adc14ffd7bad09af2e2fc3523bb"
+                "reference": "27816a01aea996191ee14d010f325434c0ee76fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3e25f279dada0adc14ffd7bad09af2e2fc3523bb",
-                "reference": "3e25f279dada0adc14ffd7bad09af2e2fc3523bb"
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/27816a01aea996191ee14d010f325434c0ee76fa",
+                "reference": "27816a01aea996191ee14d010f325434c0ee76fa"
             },
             "require": {
                 "php": "^7.2|^8.0"
@@ -1270,16 +1270,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.5",
+            "version": "10.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "ed21115d505b4b4f7dc7b5651464e19a2c7f7856"
+                "reference": "e5c5b397a95cb0db013270a985726fcae93e61b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ed21115d505b4b4f7dc7b5651464e19a2c7f7856",
-                "reference": "ed21115d505b4b4f7dc7b5651464e19a2c7f7856"
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e5c5b397a95cb0db013270a985726fcae93e61b8",
+                "reference": "e5c5b397a95cb0db013270a985726fcae93e61b8"
             },
             "require": {
                 "ext-dom": "*",
