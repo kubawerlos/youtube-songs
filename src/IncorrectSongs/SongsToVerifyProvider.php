@@ -28,8 +28,8 @@ final readonly class SongsToVerifyProvider
     ): array {
         $songsToVerify = [];
 
-        foreach ($allSongs as $song) {
-            if (\in_array($song->title, $incorrectSongsTitles, true)) {
+        foreach ($allSongs as $title => $song) {
+            if (\in_array($title, $incorrectSongsTitles, true)) {
                 $songsToVerify[] = $song;
                 continue;
             }

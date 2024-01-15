@@ -35,7 +35,7 @@ final readonly class Playlist
             }
             $song = Song::create($songTitle, $songData);
             if ($allSongs->offsetExists($songTitle)) {
-                throw new \RuntimeException(\sprintf('Song "%s" cannot be added twice.', $songTitle));
+                throw new \RuntimeException(\sprintf('Song "%s" cannot be added twice.', $song->title));
             }
             $allSongs[$songTitle] = $song;
             $songs[] = $song;
