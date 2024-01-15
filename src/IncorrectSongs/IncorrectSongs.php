@@ -84,6 +84,6 @@ final readonly class IncorrectSongs
             return [];
         }
 
-        return \explode('", "', $matches[1]);
+        return \explode('", "', \mb_strtolower($matches[1]));
     }
 }
