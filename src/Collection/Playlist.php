@@ -34,10 +34,11 @@ final readonly class Playlist
                 throw new \RuntimeException(\sprintf('Data is not an array for song "%s".', $songTitle));
             }
             $song = Song::create($songTitle, $songData);
-            if ($allSongs->offsetExists($songTitle)) {
+            $songTitleLowercased = \mb_strtolower($song->title);
+            if ($allSongs->offsetExists($songTitleLowercased)) {
                 throw new \RuntimeException(\sprintf('Song "%s" cannot be added twice.', $song->title));
             }
-            $allSongs[$songTitle] = $song;
+            $allSongs[$songTitleLowercased] = $song;
             $songs[] = $song;
         }
 

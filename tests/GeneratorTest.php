@@ -128,6 +128,24 @@ final class GeneratorTest extends TestCase
                 YAML,
         ];
 
+        yield 'Generation with duplicated song (in different casing)' => [
+            1,
+            [
+                'Song "Oye Cómo Va" cannot be added twice.',
+                'Generation failed.',
+            ],
+            null,
+            null,
+            <<<'YAML'
+                title: The Collection
+                Playlist 1:
+                    'Oye CÓmo Va':
+                        id: a0123456789
+                    'Oye Cómo Va':
+                        id: b0123456789
+                YAML,
+        ];
+
         yield 'Successful new generation' => [
             0,
             [
