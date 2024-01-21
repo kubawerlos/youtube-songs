@@ -27,9 +27,7 @@ final readonly class Playlist
     {
         $songs = [];
         foreach ($data as $songTitle => $songData) {
-            if (!\is_string($songTitle)) {
-                throw new \RuntimeException(\sprintf('Playlist "%s" has song whose title is a number.', $title));
-            }
+            $songTitle = (string) $songTitle;
             if (!\is_array($songData)) {
                 throw new \RuntimeException(\sprintf('Data is not an array for song "%s".', $songTitle));
             }

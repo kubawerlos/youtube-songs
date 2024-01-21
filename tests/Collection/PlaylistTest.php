@@ -35,16 +35,17 @@ final class PlaylistTest extends TestCase
 
     public function testCreatingWithSongHavingNumberAsTitle(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Playlist "the playlist" has song whose title is a number.');
-
-        Playlist::create(
+        $playlist = Playlist::create(
             new \ArrayObject(),
             'the playlist',
             [
                 42 => ['id' => 'i0123456789'],
             ],
         );
+
+        self::assertSame('the playlist', $playlist->title);
+        self::assertSame('42', $playlist->songs[0]->title);
+        self::assertSame('i0123456789', $playlist->songs[0]->id);
     }
 
     public function testCreatingWithSongHavingNonArrayData(): void

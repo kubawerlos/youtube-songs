@@ -159,10 +159,11 @@ final class GeneratorTest extends TestCase
                 1. :cd: "[Song 1](https://www.youtube.com/watch?v=a0123456789)"
                 1. :cd: "[Song 2](https://www.youtube.com/watch?v=b0123456789)"
 
-                ### [Playlist 2](https://www.youtube.com/watch_videos?title=Playlist%202&video_ids=c0123456789,d0123456789,e0123456789)
+                ### [Playlist 2](https://www.youtube.com/watch_videos?title=Playlist%202&video_ids=c0123456789,d0123456789,e0123456789,f0123456789)
                 1. :cd: "[Song 3](https://www.youtube.com/watch?v=c0123456789)" (The Band cover)
                 1. :fire: "[Song 4](https://www.youtube.com/watch?v=d0123456789)" (live at The Place)
                 1. :cd: "[Song 5](https://www.youtube.com/watch?v=e0123456789)" (bonus track cover)
+                1. :cd: "[654321](https://www.youtube.com/watch?v=f0123456789)" (from "Songs with numeric titles" album)
 
                 MARKDOWN
             ,
@@ -184,6 +185,9 @@ final class GeneratorTest extends TestCase
                     'Song 5':
                         id: e0123456789
                         cover: bonus track
+                    '654321':
+                        id: f0123456789
+                        source: '"Songs with numeric titles" album'
                 YAML,
         ];
 
