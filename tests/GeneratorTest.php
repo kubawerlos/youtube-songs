@@ -78,7 +78,7 @@ final class GeneratorTest extends TestCase
         yield 'File .github/youtube-songs.yaml has invalid syntax' => [
             1,
             [
-                \sprintf('Indentation problem in "%s" at line 3 (near "    - ipsum").', self::testYamlPath()),
+                \sprintf('Data in "%s" is not an array.', self::testYamlPath()),
                 'Generation failed.',
             ],
             null,

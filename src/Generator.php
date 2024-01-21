@@ -13,7 +13,6 @@ namespace App;
 
 use App\Collection\Collection;
 use App\IncorrectSongs\IncorrectSongs;
-use Symfony\Component\Yaml\Yaml;
 
 final class Generator
 {
@@ -28,7 +27,10 @@ final class Generator
         $messages = new \ArrayObject();
 
         try {
-            $data = Yaml::parseFile(self::inputPath());
+            if (!\file_exists(self::inputPath())) {
+                throw new \RuntimeException(\sprintf('File "%s" does not exist.', self::inputPath()));
+            }
+            $data = @\yaml_parse_file(self::inputPath());
             if (!\is_array($data)) {
                 throw new \RuntimeException(\sprintf('Data in "%s" is not an array.', self::inputPath()));
             }
