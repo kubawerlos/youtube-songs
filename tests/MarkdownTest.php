@@ -35,7 +35,9 @@ final class MarkdownTest extends TestCase
                 ],
                 'Playlist Two' => [
                     'A cover' => ['id' => 'd0123456789', 'cover' => 'John Doe'],
-                    'Live one' => ['id' => 'f0123456789', 'live' => 'The Stadium'],
+                    'Live one without location' => ['id' => 'f012345678a', 'live' => '2021'],
+                    'Live one with location 1' => ['id' => 'f012345678b', 'live' => 'The Stadium, 2020'],
+                    'Live one with location 2' => ['id' => 'f012345678c', 'live' => '123 Street'],
                     'Secret one' => ['id' => 'f0123456789', 'source' => 'hidden track'],
                 ],
             ],
@@ -54,9 +56,11 @@ final class MarkdownTest extends TestCase
                 1. :cd: "[Song 2](https://www.youtube.com/watch?v=b0123456789)"
                 1. :cd: "[Song 3](https://www.youtube.com/watch?v=c0123456789)"
 
-                ### [Playlist Two](https://www.youtube.com/watch_videos?title=Playlist%20Two&video_ids=d0123456789,f0123456789,f0123456789)
+                ### [Playlist Two](https://www.youtube.com/watch_videos?title=Playlist%20Two&video_ids=d0123456789,f012345678a,f012345678b,f012345678c,f0123456789)
                 1. :cd: "[A cover](https://www.youtube.com/watch?v=d0123456789)" (John Doe cover)
-                1. :fire: "[Live one](https://www.youtube.com/watch?v=f0123456789)" (live at The Stadium)
+                1. :fire: "[Live one without location](https://www.youtube.com/watch?v=f012345678a)" (live in 2021)
+                1. :fire: "[Live one with location 1](https://www.youtube.com/watch?v=f012345678b)" (live from The Stadium, 2020)
+                1. :fire: "[Live one with location 2](https://www.youtube.com/watch?v=f012345678c)" (live from 123 Street)
                 1. :cd: "[Secret one](https://www.youtube.com/watch?v=f0123456789)" (from hidden track)
 
                 MARKDOWN,
