@@ -59,7 +59,7 @@ The above will create a `README.md` file like this:
 ### [Rock](https://www.youtube.com/watch_videos?title=Rock&video_ids=d9jhDwxt22Y,a9OPA-h8mAs,Gtmnt-Ol1UY,mjXRapctp6k)
 1. :cd: "[I Love Rock 'N Roll (by Joan Jett and the Blackhearts)](https://www.youtube.com/watch?v=d9jhDwxt22Y)"
 1. :cd: "[Under Pressure (by Queen & David Bowie)](https://www.youtube.com/watch?v=a9OPA-h8mAs)" (from Remastered 2011)
-1. :fire: "[By The Way (by Red Hot Chili Peppers)](https://www.youtube.com/watch?v=Gtmnt-Ol1UY)" (live at Slane Castle)
+1. :fire: "[By The Way (by Red Hot Chili Peppers)](https://www.youtube.com/watch?v=Gtmnt-Ol1UY)" (live from Slane Castle)
 1. :cd: "[Smooth Criminal (by Alien Ant Farm)](https://www.youtube.com/watch?v=mjXRapctp6k)" (Michael Jackson cover)
 
 ```
