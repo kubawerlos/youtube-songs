@@ -88,7 +88,8 @@ final readonly class Markdown
 
         $info = [];
         if ($song->live !== null) {
-            $info[] = 'live at ' . $song->live;
+            $glue = \is_numeric($song->live) ? 'in' : 'from';
+            $info[] = 'live ' . $glue . ' ' . $song->live;
         }
         if ($song->cover !== null) {
             $info[] = $song->cover . ' cover';
