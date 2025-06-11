@@ -56,10 +56,10 @@ final readonly class GoogleApiVerifier
 
         return \array_map(
             static fn (Video $video): string => $video->id,
-            \array_filter(
+            \array_values(\array_filter(
                 $response->getItems(),
                 static fn (Video $video): bool => self::isWithoutRestrictions($video),
-            ),
+            )),
         );
     }
 
@@ -73,6 +73,6 @@ final readonly class GoogleApiVerifier
             return true;
         }
 
-        return $video->getContentDetails()->getRegionRestriction()->getBlocked() === [];
+        return $video->getContentDetails()->getRegionRestriction()->getBlocked() === null;
     }
 }
