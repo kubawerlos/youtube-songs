@@ -8,3 +8,5 @@ parameters:
         - ./tests/
         - ./generate.php
     treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        - '/ internal class /'
