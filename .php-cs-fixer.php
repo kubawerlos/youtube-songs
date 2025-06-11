@@ -9,11 +9,14 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+use PhpCsFixer\Finder;
+use PhpCsFixerConfig\Factory;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
-return PhpCsFixerConfig\Factory::createForLibrary('YouTube songs', 'Kuba Werłos', 2024)
+return Factory::createForLibrary('YouTube songs', 'Kuba Werłos', 2024)
     ->setFinder(
-        PhpCsFixer\Finder::create()
+        Finder::create()
             ->ignoreDotFiles(false)
             ->files()
             ->in(__DIR__),

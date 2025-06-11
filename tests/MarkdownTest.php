@@ -13,13 +13,13 @@ namespace Tests;
 
 use App\Collection\Collection;
 use App\Markdown;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Markdown
- *
  * @internal
  */
+#[CoversClass(Markdown::class)]
 final class MarkdownTest extends TestCase
 {
     public function testGeneration(): void

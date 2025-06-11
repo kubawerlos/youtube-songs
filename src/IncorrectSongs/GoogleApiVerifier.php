@@ -13,18 +13,22 @@ namespace App\IncorrectSongs;
 
 use Google\Client;
 use Google\Service\YouTube;
+use Google\Service\YouTube\Resource\Videos;
 use Google\Service\YouTube\Video;
 use Google\Service\YouTube\VideoListResponse;
 
+/**
+ * @internal
+ */
 final readonly class GoogleApiVerifier
 {
-    public const API_KEY_ENV_NAME = 'GOOGLE_API_KEY';
+    public const string API_KEY_ENV_NAME = 'GOOGLE_API_KEY';
 
     /**
      * @param \ArrayObject<int, string> $messages
      * @param list<string>              $songsIds
      *
-     * @return array<int, string>
+     * @return array<array-key, string>
      */
     public static function filterCorrectIds(\ArrayObject $messages, array $songsIds): array
     {
@@ -41,13 +45,16 @@ final readonly class GoogleApiVerifier
         $client = new Client();
         $client->setApplicationName('youtube-songs');
         $client->setDeveloperKey($apiKey);
+
         $youTube = new YouTube($client);
+        \assert($youTube->videos instanceof Videos);
+
         $response = $youTube->videos->listVideos('snippet', ['id' => $songsIds]);
         \assert($response instanceof VideoListResponse);
 
         return \array_map(
             static fn (Video $video): string => $video->id,
-            $response->items,
+            $response->getItems(),
         );
     }
 }

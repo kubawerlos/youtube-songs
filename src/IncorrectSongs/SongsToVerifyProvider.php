@@ -13,6 +13,9 @@ namespace App\IncorrectSongs;
 
 use App\Collection\Song;
 
+/**
+ * @internal
+ */
 final readonly class SongsToVerifyProvider
 {
     /**

@@ -12,13 +12,13 @@
 namespace Tests\Collection;
 
 use App\Collection\Song;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Collection\Song
- *
  * @internal
  */
+#[CoversClass(Song::class)]
 final class SongTest extends TestCase
 {
     public function testCreatingWithDoubleQuoteInTitle(): void
@@ -26,6 +26,7 @@ final class SongTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Song title (\'double quote -> " <- in title\') cannot contain double quote (").');
 
+        // @phpstan-ignore-next-line argument.type
         Song::create('double quote -> " <- in title', []);
     }
 
@@ -34,6 +35,7 @@ final class SongTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('The "id" is missing for song "song without Id".');
 
+        // @phpstan-ignore-next-line argument.type
         Song::create('song without Id', []);
     }
 

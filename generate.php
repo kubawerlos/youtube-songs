@@ -9,9 +9,11 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\Generator;
+
 require __DIR__ . '/vendor/autoload.php';
 
-$result = App\Generator::generate();
+$result = Generator::generate();
 
 foreach ($result['messages'] as $message) {
     echo $message, PHP_EOL;

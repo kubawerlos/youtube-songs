@@ -11,6 +11,11 @@
 
 namespace App\Collection;
 
+/**
+ * @internal
+ *
+ * @phpstan-import-type _Playlist from Playlist
+ */
 final readonly class Collection
 {
     private function __construct(
@@ -20,8 +25,8 @@ final readonly class Collection
     ) {}
 
     /**
-     * @param \ArrayObject<string, Song> $allSongs
-     * @param array<array-key, mixed>    $data
+     * @param \ArrayObject<string, Song>                    $allSongs
+     * @param array<string, _Playlist>|array{title: string} $data
      */
     public static function create(\ArrayObject $allSongs, array $data): self
     {
