@@ -57,10 +57,11 @@ final class GoogleApiVerifierTest extends TestCase
                 'a0000000000',
                 'E1FNkf3MLKY', // Tippa My Tongue
                 'CkwV0TWRAok', // Parallel Universe, unavailable in many countries
+                'o8fX0mcU6to', // Behind The Sun, not blocked, but allowed
             ],
         );
 
-        self::assertSame(['OS8taasZl8k', 'E1FNkf3MLKY'], $correctSongIds);
+        self::assertSame(['OS8taasZl8k', 'E1FNkf3MLKY', 'o8fX0mcU6to'], $correctSongIds);
         self::assertSame(['Calling Google API.'], $messages->getArrayCopy());
     }
 }
