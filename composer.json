@@ -43,10 +43,12 @@
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup",
         "fix": [
+            "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
             "php-cs-fixer fix --show-progress=dots --verbose"
         ],
         "verify": [
             "@composer bump --dry-run",
+            "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
             "php-cs-fixer fix --diff --dry-run --show-progress=none --verbose",
             "phpstan analyse --no-progress",
             "phpunit"
