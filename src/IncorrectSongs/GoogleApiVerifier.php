@@ -51,7 +51,7 @@ final readonly class GoogleApiVerifier
         $youTube = new YouTube($client);
         \assert($youTube->videos instanceof Videos);
 
-        $response = $youTube->videos->listVideos('snippet,contentDetails', ['id' => $songsIds]);
+        $response = $youTube->videos->listVideos('contentDetails', ['id' => $songsIds]);
         \assert($response instanceof VideoListResponse);
 
         return \array_map(
