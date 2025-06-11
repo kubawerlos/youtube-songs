@@ -12,9 +12,15 @@
 namespace App;
 
 use App\Collection\Collection;
+use App\Collection\Playlist;
 use App\IncorrectSongs\IncorrectSongs;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @internal
+ *
+ * @phpstan-import-type _Playlist from Playlist
+ */
 final class Generator
 {
     /**
@@ -28,6 +34,7 @@ final class Generator
         $messages = new \ArrayObject();
 
         try {
+            /** @var array<string, _Playlist> $data */
             $data = Yaml::parseFile(self::inputPath());
             if (!\is_array($data)) {
                 throw new \RuntimeException(\sprintf('Data in "%s" is not an array.', self::inputPath()));

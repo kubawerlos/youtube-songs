@@ -13,13 +13,13 @@ namespace Tests\IncorrectSongs;
 
 use App\Collection\Song;
 use App\IncorrectSongs\SongsToVerifyProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\IncorrectSongs\SongsToVerifyProvider
- *
  * @internal
  */
+#[CoversClass(SongsToVerifyProvider::class)]
 final class SongsToVerifyProviderTest extends TestCase
 {
     public function testWithoutAddingRandomSongs(): void

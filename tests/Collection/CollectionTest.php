@@ -12,13 +12,13 @@
 namespace Tests\Collection;
 
 use App\Collection\Collection;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Collection\Collection
- *
  * @internal
  */
+#[CoversClass(Collection::class)]
 final class CollectionTest extends TestCase
 {
     public function testCreatingWithoutAnyPlaylist(): void
@@ -45,6 +45,7 @@ final class CollectionTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Collection title is a number.');
 
+        // @phpstan-ignore-next-line argument.type
         Collection::create(new \ArrayObject(), ['title' => 42]);
     }
 
@@ -55,6 +56,7 @@ final class CollectionTest extends TestCase
 
         Collection::create(
             new \ArrayObject(),
+            // @phpstan-ignore-next-line argument.type
             [
                 'title' => 'the collection',
                 42 => [],

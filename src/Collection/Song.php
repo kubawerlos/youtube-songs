@@ -11,6 +11,11 @@
 
 namespace App\Collection;
 
+/**
+ * @internal
+ *
+ * @phpstan-type _Song array{id: string, cover?: string, live?: string, source?: string}
+ */
 final readonly class Song
 {
     private function __construct(
@@ -22,7 +27,7 @@ final readonly class Song
     ) {}
 
     /**
-     * @param array<array-key, mixed> $data
+     * @param _Song $data
      */
     public static function create(string $title, array $data): self
     {

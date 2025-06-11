@@ -12,13 +12,13 @@
 namespace Tests\Collection;
 
 use App\Collection\Playlist;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Collection\Playlist
- *
  * @internal
  */
+#[CoversClass(Playlist::class)]
 final class PlaylistTest extends TestCase
 {
     public function testCreatingWithoutAnySong(): void
@@ -38,6 +38,7 @@ final class PlaylistTest extends TestCase
         $playlist = Playlist::create(
             new \ArrayObject(),
             'the playlist',
+            // @phpstan-ignore-next-line argument.type
             [
                 42 => ['id' => 'i0123456789'],
             ],
@@ -56,6 +57,7 @@ final class PlaylistTest extends TestCase
         Playlist::create(
             new \ArrayObject(),
             'the playlist',
+            // @phpstan-ignore-next-line argument.type
             [
                 'the song' => 'not an array',
             ],

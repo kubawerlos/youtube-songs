@@ -12,15 +12,16 @@
 namespace Tests;
 
 use App\Generator;
+use App\IncorrectSongs\GoogleApiVerifier;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @covers \App\Generator
- *
  * @internal
  */
+#[CoversClass(Generator::class)]
 final class GeneratorTest extends TestCase
 {
     /**
@@ -146,55 +147,57 @@ final class GeneratorTest extends TestCase
                 YAML,
         ];
 
-        yield 'Successful new generation' => [
-            0,
-            [
-                'No call to Google API (no songs to verify).',
-                'Generation completed.',
-            ],
-            <<<'MARKDOWN'
-                # The Collection
+        if (!\is_string(\getenv(GoogleApiVerifier::API_KEY_ENV_NAME))) {
+            yield 'Successful new generation' => [
+                0,
+                [
+                    'No call to Google API (no songs to verify).',
+                    'Generation completed.',
+                ],
+                <<<'MARKDOWN'
+                    # The Collection
 
-                ### [Playlist 1](https://www.youtube.com/watch_videos?title=Playlist%201&video_ids=a0123456789,b0123456789)
-                1. :cd: "[Song 1](https://www.youtube.com/watch?v=a0123456789)"
-                1. :cd: "[Song 2](https://www.youtube.com/watch?v=b0123456789)"
+                    ### [Playlist 1](https://www.youtube.com/watch_videos?title=Playlist%201&video_ids=a0123456789,b0123456789)
+                    1. :cd: "[Song 1](https://www.youtube.com/watch?v=a0123456789)"
+                    1. :cd: "[Song 2](https://www.youtube.com/watch?v=b0123456789)"
 
-                ### [Playlist 2](https://www.youtube.com/watch_videos?title=Playlist%202&video_ids=c0123456789,d0123456789,e0123456789,f0123456789)
-                1. :cd: "[Song 3](https://www.youtube.com/watch?v=c0123456789)" (The Band cover)
-                1. :fire: "[Song 4](https://www.youtube.com/watch?v=d0123456789)" (live from The Place)
-                1. :cd: "[Song 5](https://www.youtube.com/watch?v=e0123456789)" (bonus track cover)
-                1. :cd: "[654321](https://www.youtube.com/watch?v=f0123456789)" (from "Songs with numeric titles" album)
+                    ### [Playlist 2](https://www.youtube.com/watch_videos?title=Playlist%202&video_ids=c0123456789,d0123456789,e0123456789,f0123456789)
+                    1. :cd: "[Song 3](https://www.youtube.com/watch?v=c0123456789)" (The Band cover)
+                    1. :fire: "[Song 4](https://www.youtube.com/watch?v=d0123456789)" (live from The Place)
+                    1. :cd: "[Song 5](https://www.youtube.com/watch?v=e0123456789)" (bonus track cover)
+                    1. :cd: "[654321](https://www.youtube.com/watch?v=f0123456789)" (from "Songs with numeric titles" album)
 
-                MARKDOWN
-            ,
-            null,
-            <<<'YAML'
-                title: The Collection
-                Playlist 1:
-                    'Song 1':
-                        id: a0123456789
-                    'Song 2':
-                        id: b0123456789
-                Playlist 2:
-                    'Song 3':
-                        id: c0123456789
-                        cover: The Band
-                    'Song 4':
-                        id: d0123456789
-                        live: The Place
-                    'Song 5':
-                        id: e0123456789
-                        cover: bonus track
-                    '654321':
-                        id: f0123456789
-                        source: '"Songs with numeric titles" album'
-                YAML,
-        ];
+                    MARKDOWN
+                ,
+                null,
+                <<<'YAML'
+                    title: The Collection
+                    Playlist 1:
+                        'Song 1':
+                            id: a0123456789
+                        'Song 2':
+                            id: b0123456789
+                    Playlist 2:
+                        'Song 3':
+                            id: c0123456789
+                            cover: The Band
+                        'Song 4':
+                            id: d0123456789
+                            live: The Place
+                        'Song 5':
+                            id: e0123456789
+                            cover: bonus track
+                        '654321':
+                            id: f0123456789
+                            source: '"Songs with numeric titles" album'
+                    YAML,
+            ];
+        }
 
         yield 'Successful generation with cleaning up incorrect songs' => [
             0,
             [
-                'No call to Google API (no API key provided).',
+                \is_string(\getenv(GoogleApiVerifier::API_KEY_ENV_NAME)) ? 'Calling Google API.' : 'No call to Google API (no API key provided).',
                 'Song "Song 1" verified - incorrect.',
                 'Song "Song 2" verified - incorrect.',
                 'Generation completed.',

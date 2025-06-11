@@ -12,13 +12,13 @@
 namespace Tests\IncorrectSongs;
 
 use App\IncorrectSongs\GoogleApiVerifier;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\IncorrectSongs\GoogleApiVerifier
- *
  * @internal
  */
+#[CoversClass(GoogleApiVerifier::class)]
 final class GoogleApiVerifierTest extends TestCase
 {
     public function testCallWithoutApiKey(): void

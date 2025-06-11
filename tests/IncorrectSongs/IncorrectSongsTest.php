@@ -12,15 +12,16 @@
 namespace Tests\IncorrectSongs;
 
 use App\Collection\Song;
+use App\IncorrectSongs\GoogleApiVerifier;
 use App\IncorrectSongs\IncorrectSongs;
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\IncorrectSongs\IncorrectSongs
- *
  * @internal
  */
+#[CoversClass(IncorrectSongs::class)]
 final class IncorrectSongsTest extends TestCase
 {
     public function testCreatingWithoutReadme(): void
@@ -79,7 +80,7 @@ final class IncorrectSongsTest extends TestCase
 
         self::assertSame(
             [
-                'No call to Google API (no API key provided).',
+                \is_string(\getenv(GoogleApiVerifier::API_KEY_ENV_NAME)) ? 'Calling Google API.' : 'No call to Google API (no API key provided).',
                 'Song "song 2" verified - incorrect.',
                 'Song "song 1" verified - incorrect.',
             ],

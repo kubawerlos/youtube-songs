@@ -14,6 +14,9 @@ namespace App;
 use App\Collection\Collection;
 use App\Collection\Song;
 
+/**
+ * @internal
+ */
 final readonly class Markdown
 {
     /**
