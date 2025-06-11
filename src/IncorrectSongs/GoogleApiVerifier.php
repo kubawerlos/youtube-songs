@@ -15,6 +15,8 @@ use Google\Client;
 use Google\Service\YouTube;
 use Google\Service\YouTube\Resource\Videos;
 use Google\Service\YouTube\Video;
+use Google\Service\YouTube\VideoContentDetails;
+use Google\Service\YouTube\VideoContentDetailsRegionRestriction;
 use Google\Service\YouTube\VideoListResponse;
 
 /**
@@ -49,12 +51,28 @@ final readonly class GoogleApiVerifier
         $youTube = new YouTube($client);
         \assert($youTube->videos instanceof Videos);
 
-        $response = $youTube->videos->listVideos('snippet', ['id' => $songsIds]);
+        $response = $youTube->videos->listVideos('snippet,contentDetails', ['id' => $songsIds]);
         \assert($response instanceof VideoListResponse);
 
         return \array_map(
             static fn (Video $video): string => $video->id,
-            $response->getItems(),
+            \array_filter(
+                $response->getItems(),
+                static fn (Video $video): bool => self::isWithoutRestrictions($video),
+            ),
         );
+    }
+
+    private static function isWithoutRestrictions(Video $video): bool
+    {
+        if (!$video->getContentDetails() instanceof VideoContentDetails) {
+            return false;
+        }
+
+        if (!$video->getContentDetails()->getRegionRestriction() instanceof VideoContentDetailsRegionRestriction) {
+            return true;
+        }
+
+        return $video->getContentDetails()->getRegionRestriction()->getBlocked() === [];
     }
 }

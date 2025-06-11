@@ -56,6 +56,7 @@ final class GoogleApiVerifierTest extends TestCase
                 'OS8taasZl8k', // Black Summer
                 'a0000000000',
                 'E1FNkf3MLKY', // Tippa My Tongue
+                'CkwV0TWRAok', // Parallel Universe, unavailable in many countries
             ],
         );
 
