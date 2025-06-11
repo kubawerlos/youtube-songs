@@ -16,4 +16,4 @@ jobs:
           coverage: none
       - run: composer install --no-progress
       - run: composer verify
-      - run: composer build .
+      - run: docker build .
