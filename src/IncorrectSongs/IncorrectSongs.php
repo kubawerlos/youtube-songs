@@ -24,8 +24,12 @@ final readonly class IncorrectSongs
      *
      * @return array<int, string>
      */
-    public static function create(string $readmePath, \ArrayObject $allSongs, \ArrayObject $messages): array
-    {
+    public static function create(
+        string $readmePath,
+        string $country,
+        \ArrayObject $allSongs,
+        \ArrayObject $messages,
+    ): array {
         $incorrectSongsTitles = \array_filter(
             self::getFromReadme($readmePath),
             static fn (string $songTitle): bool => $allSongs->offsetExists($songTitle),
@@ -43,6 +47,7 @@ final readonly class IncorrectSongs
         }
 
         $correctSongIds = GoogleApiVerifier::filterCorrectIds(
+            $country,
             $messages,
             \array_map(
                 static fn (Song $song): string => $song->id,

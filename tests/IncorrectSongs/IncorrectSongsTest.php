@@ -31,7 +31,7 @@ final class IncorrectSongsTest extends TestCase
         /** @var \ArrayObject<int, string> $messages */
         $messages = new \ArrayObject();
 
-        IncorrectSongs::create($root->url() . '/non-existing-file', new \ArrayObject(), $messages);
+        IncorrectSongs::create($root->url() . '/non-existing-file', 'PL', new \ArrayObject(), $messages);
 
         self::assertSame(['No call to Google API (no songs to verify).'], $messages->getArrayCopy());
     }
@@ -49,7 +49,7 @@ final class IncorrectSongsTest extends TestCase
         /** @var \ArrayObject<int, string> $messages */
         $messages = new \ArrayObject();
 
-        IncorrectSongs::create($root->url() . '/README.md', new \ArrayObject(), $messages);
+        IncorrectSongs::create($root->url() . '/README.md', 'PL', new \ArrayObject(), $messages);
 
         self::assertSame(['No call to Google API (no songs to verify).'], $messages->getArrayCopy());
     }
@@ -74,7 +74,7 @@ final class IncorrectSongsTest extends TestCase
         /** @var \ArrayObject<int, string> $messages */
         $messages = new \ArrayObject();
 
-        $incorrectSongsTitles = IncorrectSongs::create($root->url() . '/README.md', $allSongs, $messages);
+        $incorrectSongsTitles = IncorrectSongs::create($root->url() . '/README.md', 'PL', $allSongs, $messages);
 
         self::assertSame(['song 1', 'song 2'], $incorrectSongsTitles);
 

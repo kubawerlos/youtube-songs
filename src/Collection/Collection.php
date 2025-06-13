@@ -19,22 +19,35 @@ namespace App\Collection;
 final readonly class Collection
 {
     private function __construct(
+        public string $country,
         public string $title,
         /** @var list<Playlist> */
         public array $playlists,
     ) {}
 
     /**
-     * @param \ArrayObject<string, Song>                    $allSongs
-     * @param array<string, _Playlist>|array{title: string} $data
+     * @param \ArrayObject<string, Song>                                     $allSongs
+     * @param array<string, _Playlist>|array{country: string, title: string} $data
      */
     public static function create(\ArrayObject $allSongs, array $data): self
     {
+        if (!\array_key_exists('country', $data)) {
+            throw new \RuntimeException('Collection country code (key "country") must be present.');
+        }
+        if (!\is_string($data['country'])) {
+            throw new \RuntimeException('Collection country code must be a string.');
+        }
+        if (\preg_match('/^[A-Z]{2}$/', $data['country']) !== 1) {
+            throw new \RuntimeException('Collection country code must be 2 uppercase letters.');
+        }
+        $country = $data['country'];
+        unset($data['country']);
+
         if (!\array_key_exists('title', $data)) {
-            throw new \RuntimeException('Collection title is missing.');
+            throw new \RuntimeException('Collection title (key "title") must be present.');
         }
         if (!\is_string($data['title'])) {
-            throw new \RuntimeException('Collection title is a number.');
+            throw new \RuntimeException('Collection title must be a string.');
         }
         $title = $data['title'];
         unset($data['title']);
@@ -54,6 +67,6 @@ final readonly class Collection
             throw new \RuntimeException('Collection does not have any playlist.');
         }
 
-        return new self($title, $playlists);
+        return new self($country, $title, $playlists);
     }
 }

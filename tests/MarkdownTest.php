@@ -27,6 +27,7 @@ final class MarkdownTest extends TestCase
         $collection = Collection::create(
             new \ArrayObject(),
             [
+                'country' => 'PL',
                 'title' => 'The Collection',
                 'Playlist One' => [
                     'Song 1' => ['id' => 'a0123456789'],

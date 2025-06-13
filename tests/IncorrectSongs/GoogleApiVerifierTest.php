@@ -13,6 +13,7 @@ namespace Tests\IncorrectSongs;
 
 use App\IncorrectSongs\GoogleApiVerifier;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,13 +34,14 @@ final class GoogleApiVerifierTest extends TestCase
         /** @var \ArrayObject<int, string> $messages */
         $messages = new \ArrayObject();
 
-        $correctSongIds = GoogleApiVerifier::filterCorrectIds($messages, ['a0123456789', 'b0123456789']);
+        $correctSongIds = GoogleApiVerifier::filterCorrectIds('PL', $messages, ['a0123456789', 'b0123456789']);
 
         self::assertSame([], $correctSongIds);
         self::assertSame(['No call to Google API (no API key provided).'], $messages->getArrayCopy());
     }
 
-    public function testCallWithApiKey(): void
+    #[DataProvider('provideCallWithApiKeyCases')]
+    public function testCallWithApiKey(string $country): void
     {
         $apiKey = \getenv(GoogleApiVerifier::API_KEY_ENV_NAME);
         if ($apiKey === false) {
@@ -51,6 +53,7 @@ final class GoogleApiVerifierTest extends TestCase
         $messages = new \ArrayObject();
 
         $correctSongIds = GoogleApiVerifier::filterCorrectIds(
+            $country,
             $messages,
             [
                 'OS8taasZl8k', // Black Summer
@@ -58,10 +61,27 @@ final class GoogleApiVerifierTest extends TestCase
                 'E1FNkf3MLKY', // Tippa My Tongue
                 'CkwV0TWRAok', // Parallel Universe, unavailable in many countries
                 'o8fX0mcU6to', // Behind The Sun, not blocked, but allowed
+                '2FnK3BPBuSo', // The Adventures of Rain Dance Maggie, blocked in Brazil
             ],
         );
 
-        self::assertSame(['OS8taasZl8k', 'E1FNkf3MLKY', 'o8fX0mcU6to'], $correctSongIds);
+        $expectedCorrectSongIds = [
+            'OS8taasZl8k',
+            'E1FNkf3MLKY',
+            'o8fX0mcU6to',
+            ...($country === 'BR' ? [] : ['2FnK3BPBuSo']),
+        ];
+
+        self::assertSame($expectedCorrectSongIds, $correctSongIds);
         self::assertSame(['Calling Google API.'], $messages->getArrayCopy());
+    }
+
+    /**
+     * @return iterable<array{string}>
+     */
+    public static function provideCallWithApiKeyCases(): iterable
+    {
+        yield ['BR'];
+        yield ['PL'];
     }
 }
