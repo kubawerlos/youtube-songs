@@ -28,25 +28,51 @@ final class CollectionTest extends TestCase
 
         Collection::create(
             new \ArrayObject(),
-            ['title' => 'the collection'],
+            ['country' => 'PL', 'title' => 'the collection'],
         );
+    }
+
+    public function testCreatingWithoutCountry(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Collection country code (key "country") must be present.');
+
+        Collection::create(new \ArrayObject(), ['title' => 'the collection']);
+    }
+
+    public function testCreatingWithCountryNotAString(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Collection country code must be a string.');
+
+        // @phpstan-ignore-next-line argument.type
+        Collection::create(new \ArrayObject(), ['country' => 111, 'title' => 'the collection']);
+    }
+
+    public function testCreatingWithCountryNotTwoUppercaseLetters(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Collection country code must be 2 uppercase letters.');
+
+        // @phpstan-ignore-next-line argument.type
+        Collection::create(new \ArrayObject(), ['country' => 'pl', 'title' => 'the collection']);
     }
 
     public function testCreatingWithoutTitle(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Collection title is missing.');
+        $this->expectExceptionMessage('Collection title (key "title") must be present.');
 
-        Collection::create(new \ArrayObject(), []);
+        Collection::create(new \ArrayObject(), ['country' => 'PL']);
     }
 
-    public function testCreatingWithTitleBeingANumber(): void
+    public function testCreatingWithTitleNotAString(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Collection title is a number.');
+        $this->expectExceptionMessage('Collection title must be a string.');
 
         // @phpstan-ignore-next-line argument.type
-        Collection::create(new \ArrayObject(), ['title' => 42]);
+        Collection::create(new \ArrayObject(), ['country' => 'PL', 'title' => 42]);
     }
 
     public function testCreatingWithPlaylistHavingNumberAsTitle(): void
@@ -58,6 +84,7 @@ final class CollectionTest extends TestCase
             new \ArrayObject(),
             // @phpstan-ignore-next-line argument.type
             [
+                'country' => 'PL',
                 'title' => 'the collection',
                 42 => [],
             ],
@@ -72,6 +99,7 @@ final class CollectionTest extends TestCase
         Collection::create(
             new \ArrayObject(),
             [
+                'country' => 'PL',
                 'title' => 'the collection',
                 'Playlist 1' => 'not an array',
             ],
@@ -83,6 +111,7 @@ final class CollectionTest extends TestCase
         $collection = Collection::create(
             new \ArrayObject(),
             [
+                'country' => 'PL',
                 'title' => 'the collection',
                 'playlist 1' => [
                     'song 1' => ['id' => 'a0123456789'],

@@ -113,6 +113,7 @@ final class GeneratorTest extends TestCase
             null,
             null,
             <<<'YAML'
+                country: PL
                 title: The Collection
                 Playlist 1:
                     'Song A':
@@ -138,6 +139,7 @@ final class GeneratorTest extends TestCase
             null,
             null,
             <<<'YAML'
+                country: PL
                 title: The Collection
                 Playlist 1:
                     'Oye CÓmo Va':
@@ -171,6 +173,7 @@ final class GeneratorTest extends TestCase
                 ,
                 null,
                 <<<'YAML'
+                    country: PL
                     title: The Collection
                     Playlist 1:
                         'Song 1':
@@ -225,6 +228,7 @@ final class GeneratorTest extends TestCase
                 MARKDOWN
             ,
             <<<'YAML'
+                country: PL
                 title: The Collection
                 Playlist 1:
                     'Song 1':

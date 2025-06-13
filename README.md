@@ -7,6 +7,7 @@ You can see how this action is used [here](https://github.com/orgs/youtube-songs
 ### Usage
 Create a file `.github/youtube-songs.yaml` in your repository with the songs defined, as in the example below.
 ```yaml
+country: 'PL' # ISO 3166-1 alpha-2 code of a country that will be used to check for songs availability
 title: 'My favourite songs'
 
 'Ballads':

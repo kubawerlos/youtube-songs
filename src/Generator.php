@@ -41,7 +41,7 @@ final class Generator
             }
 
             $collection = Collection::create($allSongs, $data);
-            $incorrectSongs = IncorrectSongs::create(self::outputPath(), $allSongs, $messages);
+            $incorrectSongs = IncorrectSongs::create(self::outputPath(), $collection->country, $allSongs, $messages);
 
             \file_put_contents(
                 self::outputPath(),

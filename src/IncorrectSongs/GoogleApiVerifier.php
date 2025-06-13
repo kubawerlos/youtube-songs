@@ -32,7 +32,7 @@ final readonly class GoogleApiVerifier
      *
      * @return array<array-key, string>
      */
-    public static function filterCorrectIds(\ArrayObject $messages, array $songsIds): array
+    public static function filterCorrectIds(string $country, \ArrayObject $messages, array $songsIds): array
     {
         $apiKey = \getenv(self::API_KEY_ENV_NAME);
 
@@ -58,21 +58,28 @@ final readonly class GoogleApiVerifier
             static fn (Video $video): string => $video->id,
             \array_values(\array_filter(
                 $response->getItems(),
-                static fn (Video $video): bool => self::isWithoutRestrictions($video),
+                static fn (Video $video): bool => self::isWithoutRestrictions($video, $country),
             )),
         );
     }
 
-    private static function isWithoutRestrictions(Video $video): bool
+    private static function isWithoutRestrictions(Video $video, string $country): bool
     {
-        if (!$video->getContentDetails() instanceof VideoContentDetails) {
+        $contentDetails = $video->getContentDetails();
+        if (!$contentDetails instanceof VideoContentDetails) {
             return false;
         }
 
-        if (!$video->getContentDetails()->getRegionRestriction() instanceof VideoContentDetailsRegionRestriction) {
+        $regionRestriction = $contentDetails->getRegionRestriction();
+        if (!$regionRestriction instanceof VideoContentDetailsRegionRestriction) {
             return true;
         }
 
-        return $video->getContentDetails()->getRegionRestriction()->getBlocked() === null;
+        $blocked = $regionRestriction->getBlocked();
+        if (!\is_array($blocked)) {
+            return true;
+        }
+
+        return !\in_array($country, $blocked, true);
     }
 }
