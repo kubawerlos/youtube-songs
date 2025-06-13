@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: kubawerlos/youtube-songs@v1
+      - uses: kubawerlos/youtube-songs@v2
       - uses: stefanzweifel/git-auto-commit-action@v5
 
 ```
@@ -71,7 +71,7 @@ and update it whenever there is a change in the `.github/youtube-songs.yaml` fil
 
 To do this, add `GOOGLE_API_KEY` to your GitHub Actions workflow:
 ```yaml
-      - uses: kubawerlos/youtube-songs@v1
+      - uses: kubawerlos/youtube-songs@v2
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 ```
