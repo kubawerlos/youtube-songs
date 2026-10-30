@@ -27,8 +27,8 @@ final readonly class Collection
     ) {}
 
     /**
-     * @param \ArrayObject<string, Song>                                                       $allSongs
-     * @param array<string, _Playlist>|array{country: string, title: string, all_songs?: bool} $data
+     * @param \ArrayObject<string, Song>                                                            $allSongs
+     * @param array<string, _Playlist>|array{country: string, title: string, all_songs_link?: bool} $data
      */
     public static function create(\ArrayObject $allSongs, array $data): self
     {
@@ -53,11 +53,11 @@ final readonly class Collection
         $title = $data['title'];
         unset($data['title']);
 
-        $allSongsLink = $data['all_songs'] ?? false;
+        $allSongsLink = $data['all_songs_link'] ?? false;
         if (!\is_bool($allSongsLink)) {
-            throw new \RuntimeException('Collection all songs option must be a boolean.');
+            throw new \RuntimeException('Collection all songs link option must be a boolean.');
         }
-        unset($data['all_songs']);
+        unset($data['all_songs_link']);
 
         $playlists = [];
         foreach ($data as $playlistTitle => $playlistData) {
@@ -80,7 +80,7 @@ final readonly class Collection
                 $playlists,
             ));
             if ($songsCount > Playlist::MAX_SONGS_COUNT) {
-                throw new \RuntimeException(\sprintf('Collection has too many (%s, maximum is %s) songs for all songs option.', $songsCount, Playlist::MAX_SONGS_COUNT));
+                throw new \RuntimeException(\sprintf('Collection has too many (%s, maximum is %s) songs for all songs link option.', $songsCount, Playlist::MAX_SONGS_COUNT));
             }
         }
 

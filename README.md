@@ -9,7 +9,7 @@ Create a file `.github/youtube-songs.yaml` in your repository with the songs def
 ```yaml
 country: 'PL' # ISO 3166-1 alpha-2 code of a country that will be used to check for songs availability
 title: 'My favourite songs'
-all_songs: true # optional, adds a link to all songs (maximum 50) at the end
+all_songs_link: true # optional, adds a link to all songs (maximum 50) at the end
 
 'Ballads':
     "Imagine (by John Lennon)":

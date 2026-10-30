@@ -76,7 +76,7 @@ final class MarkdownTest extends TestCase
             [
                 'country' => 'PL',
                 'title' => 'The Collection',
-                'all_songs' => true,
+                'all_songs_link' => true,
                 'Playlist One' => [
                     'Song 1' => ['id' => 'a0123456789'],
                     'Song 2' => ['id' => 'b0123456789'],

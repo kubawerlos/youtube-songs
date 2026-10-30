@@ -75,16 +75,16 @@ final class CollectionTest extends TestCase
         Collection::create(new \ArrayObject(), ['country' => 'PL', 'title' => 42]);
     }
 
-    public function testCreatingWithAllSongsNotABoolean(): void
+    public function testCreatingWithAllSongsLinkNotABoolean(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Collection all songs option must be a boolean.');
+        $this->expectExceptionMessage('Collection all songs link option must be a boolean.');
 
         // @phpstan-ignore-next-line argument.type
-        Collection::create(new \ArrayObject(), ['country' => 'PL', 'title' => 'the collection', 'all_songs' => 'yes']);
+        Collection::create(new \ArrayObject(), ['country' => 'PL', 'title' => 'the collection', 'all_songs_link' => 'yes']);
     }
 
-    public function testCreatingWithAllSongsAndTooManySongs(): void
+    public function testCreatingWithAllSongsLinkAndTooManySongs(): void
     {
         $playlist1 = [];
         for ($i = 1; $i <= 25; $i++) {
@@ -96,21 +96,21 @@ final class CollectionTest extends TestCase
         }
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Collection has too many (51, maximum is 50) songs for all songs option.');
+        $this->expectExceptionMessage('Collection has too many (51, maximum is 50) songs for all songs link option.');
 
         Collection::create(
             new \ArrayObject(),
             [
                 'country' => 'PL',
                 'title' => 'the collection',
-                'all_songs' => true,
+                'all_songs_link' => true,
                 'playlist 1' => $playlist1,
                 'playlist 2' => $playlist2,
             ],
         );
     }
 
-    public function testCreatingWithAllSongsAndMaximumSongs(): void
+    public function testCreatingWithAllSongsLinkAndMaximumSongs(): void
     {
         $playlist1 = [];
         for ($i = 1; $i <= 25; $i++) {
@@ -126,7 +126,7 @@ final class CollectionTest extends TestCase
             [
                 'country' => 'PL',
                 'title' => 'the collection',
-                'all_songs' => true,
+                'all_songs_link' => true,
                 'playlist 1' => $playlist1,
                 'playlist 2' => $playlist2,
             ],
