@@ -52,6 +52,7 @@ final class SongTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Redundant field ("redundant_key") for song "song with redundant data key".');
 
+        // @phpstan-ignore-next-line argument.type
         Song::create('song with redundant data key', ['id' => 'i0123456789', 'redundant_key' => 'foo']);
     }
 
@@ -60,6 +61,7 @@ final class SongTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Redundant fields ("redundant_key_1", "redundant_key_2") for song "song with redundant data keys".');
 
+        // @phpstan-ignore-next-line argument.type
         Song::create('song with redundant data keys', ['id' => 'i0123456789', 'redundant_key_1' => 'foo', 'redundant_key_2' => 'bar']);
     }
 

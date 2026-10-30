@@ -54,6 +54,7 @@ final readonly class Song
         unset($data['source']);
 
         if ($data !== []) {
+            // @phpstan-ignore-next-line greater.invalid
             throw new \RuntimeException(\sprintf('Redundant field%s ("%s") for song "%s".', \count($data) > 1 ? 's' : '', \implode('", "', \array_keys($data)), $title));
         }
 
