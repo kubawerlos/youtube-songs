@@ -75,6 +75,66 @@ final class CollectionTest extends TestCase
         Collection::create(new \ArrayObject(), ['country' => 'PL', 'title' => 42]);
     }
 
+    public function testCreatingWithAllSongsNotABoolean(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Collection all songs option must be a boolean.');
+
+        // @phpstan-ignore-next-line argument.type
+        Collection::create(new \ArrayObject(), ['country' => 'PL', 'title' => 'the collection', 'all_songs' => 'yes']);
+    }
+
+    public function testCreatingWithAllSongsAndTooManySongs(): void
+    {
+        $playlist1 = [];
+        for ($i = 1; $i <= 25; $i++) {
+            $playlist1['song ' . $i] = ['id' => 'i0123456789'];
+        }
+        $playlist2 = [];
+        for ($i = 26; $i <= 51; $i++) {
+            $playlist2['song ' . $i] = ['id' => 'i0123456789'];
+        }
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Collection has too many (51, maximum is 50) songs for all songs option.');
+
+        Collection::create(
+            new \ArrayObject(),
+            [
+                'country' => 'PL',
+                'title' => 'the collection',
+                'all_songs' => true,
+                'playlist 1' => $playlist1,
+                'playlist 2' => $playlist2,
+            ],
+        );
+    }
+
+    public function testCreatingWithAllSongsAndMaximumSongs(): void
+    {
+        $playlist1 = [];
+        for ($i = 1; $i <= 25; $i++) {
+            $playlist1['song ' . $i] = ['id' => 'i0123456789'];
+        }
+        $playlist2 = [];
+        for ($i = 26; $i <= 50; $i++) {
+            $playlist2['song ' . $i] = ['id' => 'i0123456789'];
+        }
+
+        $collection = Collection::create(
+            new \ArrayObject(),
+            [
+                'country' => 'PL',
+                'title' => 'the collection',
+                'all_songs' => true,
+                'playlist 1' => $playlist1,
+                'playlist 2' => $playlist2,
+            ],
+        );
+
+        self::assertTrue($collection->allSongsLink);
+    }
+
     public function testCreatingWithPlaylistHavingNumberAsTitle(): void
     {
         $this->expectException(\RuntimeException::class);
@@ -126,6 +186,7 @@ final class CollectionTest extends TestCase
         );
 
         self::assertSame('the collection', $collection->title);
+        self::assertFalse($collection->allSongsLink);
         self::assertSame('playlist 1', $collection->playlists[0]->title);
         self::assertSame('song 1', $collection->playlists[0]->songs[0]->title);
         self::assertSame('a0123456789', $collection->playlists[0]->songs[0]->id);

@@ -20,6 +20,8 @@ namespace App\Collection;
  */
 final readonly class Playlist
 {
+    public const int MAX_SONGS_COUNT = 50;
+
     private function __construct(
         public string $title,
         /** @var list<Song> */
@@ -51,8 +53,8 @@ final readonly class Playlist
             throw new \RuntimeException(\sprintf('Playlist "%s" does not have any song.', $title));
         }
 
-        if (\count($songs) > 50) {
-            throw new \RuntimeException(\sprintf('Playlist "%s" has too many (%s, maximum is %s) songs.', $title, \count($songs), 50));
+        if (\count($songs) > self::MAX_SONGS_COUNT) {
+            throw new \RuntimeException(\sprintf('Playlist "%s" has too many (%s, maximum is %s) songs.', $title, \count($songs), self::MAX_SONGS_COUNT));
         }
 
         return new self($title, $songs);

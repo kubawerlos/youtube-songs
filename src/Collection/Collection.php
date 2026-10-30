@@ -21,13 +21,14 @@ final readonly class Collection
     private function __construct(
         public string $country,
         public string $title,
+        public bool $allSongsLink,
         /** @var list<Playlist> */
         public array $playlists,
     ) {}
 
     /**
-     * @param \ArrayObject<string, Song>                                     $allSongs
-     * @param array<string, _Playlist>|array{country: string, title: string} $data
+     * @param \ArrayObject<string, Song>                                                       $allSongs
+     * @param array<string, _Playlist>|array{country: string, title: string, all_songs?: bool} $data
      */
     public static function create(\ArrayObject $allSongs, array $data): self
     {
@@ -52,6 +53,12 @@ final readonly class Collection
         $title = $data['title'];
         unset($data['title']);
 
+        $allSongsLink = $data['all_songs'] ?? false;
+        if (!\is_bool($allSongsLink)) {
+            throw new \RuntimeException('Collection all songs option must be a boolean.');
+        }
+        unset($data['all_songs']);
+
         $playlists = [];
         foreach ($data as $playlistTitle => $playlistData) {
             if (!\is_string($playlistTitle)) {
@@ -67,6 +74,16 @@ final readonly class Collection
             throw new \RuntimeException('Collection does not have any playlist.');
         }
 
-        return new self($country, $title, $playlists);
+        if ($allSongsLink) {
+            $songsCount = \array_sum(\array_map(
+                static fn (Playlist $playlist): int => \count($playlist->songs),
+                $playlists,
+            ));
+            if ($songsCount > Playlist::MAX_SONGS_COUNT) {
+                throw new \RuntimeException(\sprintf('Collection has too many (%s, maximum is %s) songs for all songs option.', $songsCount, Playlist::MAX_SONGS_COUNT));
+            }
+        }
+
+        return new self($country, $title, $allSongsLink, $playlists);
     }
 }
