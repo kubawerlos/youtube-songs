@@ -1,23 +1,23 @@
 {
     "type": "project",
     "require": {
-        "php": "^8.4",
+        "php": "^8.5",
         "ext-mbstring": "*",
-        "google/apiclient": "^2.18.3",
-        "google/apiclient-services": "^0.398.0",
-        "symfony/yaml": "^7.3"
+        "google/apiclient": "^2.20.1",
+        "google/apiclient-services": "^0.465.0",
+        "symfony/yaml": "^8.1.10"
     },
     "require-dev": {
         "kubawerlos/composer-smaller-lock": "^1.1.0",
-        "kubawerlos/php-cs-fixer-config": "^5.2",
+        "kubawerlos/php-cs-fixer-config": "^5.7",
         "mikey179/vfsstream": "^1.6.12",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^2.1.17",
-        "phpstan/phpstan-phpunit": "^2.0.6",
-        "phpstan/phpstan-strict-rules": "^2.0.4",
-        "phpunit/phpunit": "^12.2.1",
-        "symfony/filesystem": "^7.3",
-        "symfony/var-dumper": "^7.3"
+        "phpstan/phpstan": "^2.3.4",
+        "phpstan/phpstan-phpunit": "^2.1.1",
+        "phpstan/phpstan-strict-rules": "^2.1.0",
+        "phpunit/phpunit": "^13.4.5",
+        "symfony/filesystem": "^8.1.9",
+        "symfony/var-dumper": "^8.1.10"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +33,8 @@
         "allow-plugins": {
             "kubawerlos/composer-smaller-lock": true,
             "phpstan/extension-installer": true
-        }
+        },
+        "bump-after-update": true
     },
     "extra": {
         "google/apiclient-services": [
