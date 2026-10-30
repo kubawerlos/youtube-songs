@@ -98,7 +98,7 @@ final class MarkdownTest extends TestCase
                 ### [Playlist Two](https://www.youtube.com/watch_videos?title=Playlist%20Two&video_ids=c0123456789)
                 1. :cd: "[Song 3](https://www.youtube.com/watch?v=c0123456789)"
 
-                ### [The Collection](https://www.youtube.com/watch_videos?title=The%20Collection&video_ids=a0123456789,b0123456789,c0123456789)
+                ### [All songs](https://www.youtube.com/watch_videos?title=The%20Collection&video_ids=a0123456789,b0123456789,c0123456789)
 
                 MARKDOWN,
             Markdown::generate($collection, []),

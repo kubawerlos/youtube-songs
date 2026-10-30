@@ -31,14 +31,14 @@ final readonly class Markdown
 
         $allSongs = [];
         foreach ($collection->playlists as $playlist) {
-            $markdown .= "\n### " . self::generateAlbumLink($playlist->title, $playlist->songs) . "\n"
+            $markdown .= "\n### " . self::generateAlbumLink($playlist->title, $playlist->title, $playlist->songs) . "\n"
 
                 . self::generateSongRows($playlist->songs) . "\n";
             $allSongs = [...$allSongs, ...$playlist->songs];
         }
 
         if ($collection->allSongsLink) {
-            $markdown .= "\n### " . self::generateAlbumLink($collection->title, $allSongs) . "\n";
+            $markdown .= "\n### " . self::generateAlbumLink('All songs', $collection->title, $allSongs) . "\n";
         }
 
         return $markdown;
@@ -60,7 +60,7 @@ final readonly class Markdown
     /**
      * @param list<Song> $songs
      */
-    private static function generateAlbumLink(string $album, array $songs): string
+    private static function generateAlbumLink(string $text, string $album, array $songs): string
     {
         $videoIds = [];
         foreach ($songs as $song) {
@@ -69,7 +69,7 @@ final readonly class Markdown
 
         return \sprintf(
             '[%s](https://www.youtube.com/watch_videos?title=%s&video_ids=%s)',
-            $album,
+            $text,
             \rawurlencode($album),
             \implode(',', $videoIds),
         );
