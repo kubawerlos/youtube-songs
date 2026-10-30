@@ -1,0 +1,17 @@
+name: Move major tag
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  move-major-tag:
+    if: contains(github.ref_name, '.')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - run: |
+          git tag -f "${GITHUB_REF_NAME%%.*}"
+          git push -f origin "${GITHUB_REF_NAME%%.*}"
