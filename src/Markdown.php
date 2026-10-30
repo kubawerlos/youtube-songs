@@ -29,10 +29,16 @@ final readonly class Markdown
             $markdown .= self::incorrectSongsRow($incorrectSongs);
         }
 
+        $allSongs = [];
         foreach ($collection->playlists as $playlist) {
             $markdown .= "\n### " . self::generateAlbumLink($playlist->title, $playlist->songs) . "\n"
 
                 . self::generateSongRows($playlist->songs) . "\n";
+            $allSongs = [...$allSongs, ...$playlist->songs];
+        }
+
+        if ($collection->allSongsLink) {
+            $markdown .= "\n### " . self::generateAlbumLink($collection->title, $allSongs) . "\n";
         }
 
         return $markdown;

@@ -68,4 +68,40 @@ final class MarkdownTest extends TestCase
             Markdown::generate($collection, $incorrectSongs),
         );
     }
+
+    public function testGenerationWithAllSongsLink(): void
+    {
+        $collection = Collection::create(
+            new \ArrayObject(),
+            [
+                'country' => 'PL',
+                'title' => 'The Collection',
+                'all_songs' => true,
+                'Playlist One' => [
+                    'Song 1' => ['id' => 'a0123456789'],
+                    'Song 2' => ['id' => 'b0123456789'],
+                ],
+                'Playlist Two' => [
+                    'Song 3' => ['id' => 'c0123456789'],
+                ],
+            ],
+        );
+
+        self::assertSame(
+            <<<'MARKDOWN'
+                # The Collection
+
+                ### [Playlist One](https://www.youtube.com/watch_videos?title=Playlist%20One&video_ids=a0123456789,b0123456789)
+                1. :cd: "[Song 1](https://www.youtube.com/watch?v=a0123456789)"
+                1. :cd: "[Song 2](https://www.youtube.com/watch?v=b0123456789)"
+
+                ### [Playlist Two](https://www.youtube.com/watch_videos?title=Playlist%20Two&video_ids=c0123456789)
+                1. :cd: "[Song 3](https://www.youtube.com/watch?v=c0123456789)"
+
+                ### [The Collection](https://www.youtube.com/watch_videos?title=The%20Collection&video_ids=a0123456789,b0123456789,c0123456789)
+
+                MARKDOWN,
+            Markdown::generate($collection, []),
+        );
+    }
 }

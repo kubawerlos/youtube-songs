@@ -9,6 +9,7 @@ Create a file `.github/youtube-songs.yaml` in your repository with the songs def
 ```yaml
 country: 'PL' # ISO 3166-1 alpha-2 code of a country that will be used to check for songs availability
 title: 'My favourite songs'
+all_songs: true # optional, adds a link to all songs (maximum 50) at the end
 
 'Ballads':
     "Imagine (by John Lennon)":
@@ -62,6 +63,8 @@ The above will create a `README.md` file like this:
 1. :cd: "[Under Pressure (by Queen & David Bowie)](https://www.youtube.com/watch?v=a9OPA-h8mAs)" (from Remastered 2011)
 1. :fire: "[By The Way (by Red Hot Chili Peppers)](https://www.youtube.com/watch?v=Gtmnt-Ol1UY)" (live from Slane Castle)
 1. :cd: "[Smooth Criminal (by Alien Ant Farm)](https://www.youtube.com/watch?v=mjXRapctp6k)" (Michael Jackson cover)
+
+### [My favourite songs](https://www.youtube.com/watch_videos?title=My%20favourite%20songs&video_ids=VOgFZfRVaww,nvF5imxSaLI,CTcb_33-DiI,d9jhDwxt22Y,a9OPA-h8mAs,Gtmnt-Ol1UY,mjXRapctp6k)
 
 ```
 and update it whenever there is a change in the `.github/youtube-songs.yaml` file.
